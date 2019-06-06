@@ -1,0 +1,14 @@
+// MARK - Generate SwiftUI Views for Enums
+
+import SwiftUI
+
+{% for enum in types.enums %}
+{{ enum.accessLevel }} extension {{ enum.name }} {
+  struct Switch<{% for index in 0...enum.cases.count %}T{{ index }}: View{{ ', ' if not forloop.last }}{% endfor %}>: View {
+    var body: TupleView<({% for index in 1...enum.cases.count %}T{{ index }}{{ ', ' if not forloop.last }}{% endfor %})>
+
+    // HELP !1!!
+  }
+}
+{% endfor %}
+

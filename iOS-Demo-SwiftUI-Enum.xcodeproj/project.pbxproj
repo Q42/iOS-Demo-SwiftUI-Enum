@@ -13,6 +13,9 @@
 		0B01330622A7EBBD006DB06A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B01330522A7EBBD006DB06A /* Assets.xcassets */; };
 		0B01330922A7EBBD006DB06A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B01330822A7EBBD006DB06A /* Preview Assets.xcassets */; };
 		0B01330C22A7EBBD006DB06A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B01330A22A7EBBD006DB06A /* LaunchScreen.storyboard */; };
+		0B368A7922A9189E00A1ED5C /* EnumViews.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B368A7822A9189E00A1ED5C /* EnumViews.generated.swift */; };
+		0B368A7D22A9383F00A1ED5C /* EnumViews.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 0B368A7C22A9383F00A1ED5C /* EnumViews.stencil */; };
+		D5D65D5D40B25113CB53FE6C /* Pods_iOS_Demo_SwiftUI_Enum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68032D3B05EBEB00F0BC9EA7 /* Pods_iOS_Demo_SwiftUI_Enum.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,11 @@
 		0B01330822A7EBBD006DB06A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0B01330B22A7EBBD006DB06A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B01330D22A7EBBD006DB06A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B368A7822A9189E00A1ED5C /* EnumViews.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumViews.generated.swift; sourceTree = "<group>"; };
+		0B368A7C22A9383F00A1ED5C /* EnumViews.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = EnumViews.stencil; sourceTree = "<group>"; };
+		52655A43798A612BC225E402 /* Pods-iOS-Demo-SwiftUI-Enum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Demo-SwiftUI-Enum.release.xcconfig"; path = "Target Support Files/Pods-iOS-Demo-SwiftUI-Enum/Pods-iOS-Demo-SwiftUI-Enum.release.xcconfig"; sourceTree = "<group>"; };
+		68032D3B05EBEB00F0BC9EA7 /* Pods_iOS_Demo_SwiftUI_Enum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Demo_SwiftUI_Enum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EC46D5A4C01A9D72870B8B9 /* Pods-iOS-Demo-SwiftUI-Enum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-Demo-SwiftUI-Enum.debug.xcconfig"; path = "Target Support Files/Pods-iOS-Demo-SwiftUI-Enum/Pods-iOS-Demo-SwiftUI-Enum.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D65D5D40B25113CB53FE6C /* Pods_iOS_Demo_SwiftUI_Enum.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +51,8 @@
 			children = (
 				0B0132FE22A7EBBB006DB06A /* iOS-Demo-SwiftUI-Enum */,
 				0B0132FD22A7EBBB006DB06A /* Products */,
+				ABBA0CBB2A9FDF50FAEFA4B7 /* Pods */,
+				2D548BDA7BB05D9A58CDD843 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +67,7 @@
 		0B0132FE22A7EBBB006DB06A /* iOS-Demo-SwiftUI-Enum */ = {
 			isa = PBXGroup;
 			children = (
+				0B368A7222A914EB00A1ED5C /* Sourcery */,
 				0B0132FF22A7EBBB006DB06A /* AppDelegate.swift */,
 				0B01330122A7EBBB006DB06A /* SceneDelegate.swift */,
 				0B01330322A7EBBB006DB06A /* ContentView.swift */,
@@ -75,6 +87,48 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		0B368A7122A914CF00A1ED5C /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				0B368A7C22A9383F00A1ED5C /* EnumViews.stencil */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		0B368A7222A914EB00A1ED5C /* Sourcery */ = {
+			isa = PBXGroup;
+			children = (
+				0B368A7322A914F100A1ED5C /* Output */,
+				0B368A7122A914CF00A1ED5C /* Templates */,
+			);
+			path = Sourcery;
+			sourceTree = "<group>";
+		};
+		0B368A7322A914F100A1ED5C /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				0B368A7822A9189E00A1ED5C /* EnumViews.generated.swift */,
+			);
+			path = Output;
+			sourceTree = "<group>";
+		};
+		2D548BDA7BB05D9A58CDD843 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68032D3B05EBEB00F0BC9EA7 /* Pods_iOS_Demo_SwiftUI_Enum.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABBA0CBB2A9FDF50FAEFA4B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9EC46D5A4C01A9D72870B8B9 /* Pods-iOS-Demo-SwiftUI-Enum.debug.xcconfig */,
+				52655A43798A612BC225E402 /* Pods-iOS-Demo-SwiftUI-Enum.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,6 +136,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B01331022A7EBBD006DB06A /* Build configuration list for PBXNativeTarget "iOS-Demo-SwiftUI-Enum" */;
 			buildPhases = (
+				805BAA613D0965C779A8BA40 /* [CP] Check Pods Manifest.lock */,
+				0B368A7022A913F600A1ED5C /* Sourcery */,
 				0B0132F822A7EBBB006DB06A /* Sources */,
 				0B0132F922A7EBBB006DB06A /* Frameworks */,
 				0B0132FA22A7EBBB006DB06A /* Resources */,
@@ -133,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B368A7D22A9383F00A1ED5C /* EnumViews.stencil in Resources */,
 				0B01330C22A7EBBD006DB06A /* LaunchScreen.storyboard in Resources */,
 				0B01330922A7EBBD006DB06A /* Preview Assets.xcassets in Resources */,
 				0B01330622A7EBBD006DB06A /* Assets.xcassets in Resources */,
@@ -141,11 +198,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B368A7022A913F600A1ED5C /* Sourcery */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Sourcery;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PODS_ROOT/Sourcery/bin/sourcery --sources ./iOS-Demo-SwiftUI-Enum --templates ./iOS-Demo-SwiftUI-Enum/Sourcery/Templates --output ./iOS-Demo-SwiftUI-Enum/Sourcery/Output\n";
+		};
+		805BAA613D0965C779A8BA40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-Demo-SwiftUI-Enum-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0B0132F822A7EBBB006DB06A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B368A7922A9189E00A1ED5C /* EnumViews.generated.swift in Sources */,
 				0B01330022A7EBBB006DB06A /* AppDelegate.swift in Sources */,
 				0B01330222A7EBBB006DB06A /* SceneDelegate.swift in Sources */,
 				0B01330422A7EBBB006DB06A /* ContentView.swift in Sources */,
@@ -282,6 +383,7 @@
 		};
 		0B01331122A7EBBD006DB06A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EC46D5A4C01A9D72870B8B9 /* Pods-iOS-Demo-SwiftUI-Enum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +404,7 @@
 		};
 		0B01331222A7EBBD006DB06A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52655A43798A612BC225E402 /* Pods-iOS-Demo-SwiftUI-Enum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
