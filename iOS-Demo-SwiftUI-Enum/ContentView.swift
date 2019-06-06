@@ -8,16 +8,63 @@
 
 import SwiftUI
 
-struct ContentView : View {
-    var body: some View {
-        Text("Hello World")
-    }
+enum Row: Identifiable {
+  case text(String)
+  case image(name: String, width: CGFloat, height: CGFloat)
+  case separator
+
+  var id: UUID { return UUID() }
 }
 
-#if DEBUG
-struct ContentView_Previews : PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct ContentView: View {
+
+  var rows: [Row] = [
+    .text("Hi"),
+    .text("Bye"),
+    .separator,
+    .image(name: "image", width: 42, height: 42),
+  ]
+
+  var body: some View {
+    return List(rows) { row in
+      RowSwitch(
+        row: row,
+        text: { label in
+          Text(label)
+        }, image: { (name, width, height) in
+          Image(name)
+            .resizable()
+            .frame(width: width, height: height, alignment: .center)
+        }, separator: {
+          Divider()
+        }
+      )
     }
+  }
 }
-#endif
+
+struct RowSwitch<TextView: View, ImageView: View, SeparatorView: View>: View {
+  var body: TupleView<(TextView?, TupleView<(ImageView?, SeparatorView?)>)>
+
+  init(
+    row: Row,
+    text: @escaping (String) -> TextView,
+    image: @escaping (String, CGFloat, CGFloat) -> ImageView,
+    separator: @escaping () -> SeparatorView)
+  {
+    var textView: TextView?
+    var imageView: ImageView?
+    var separatorView: SeparatorView?
+
+    switch row {
+    case .text(let label):
+      textView = text(label)
+    case .image(let name, let width, let height):
+      imageView = image(name, width, height)
+    case .separator:
+      separatorView = separator()
+    }
+
+    body = TupleView((textView, TupleView((imageView, separatorView))))
+  }
+}
