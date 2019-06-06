@@ -3,6 +3,7 @@
 import SwiftUI
 
 {% for enum in types.enums %}
+{% if enum.cases.count > 0 %}
 {{ enum.accessLevel }} extension {{ enum.name }} {
   struct Switch<{% for case in enum.cases %}T{{ forloop.counter }}: View{{ ', ' if not forloop.last }}{% endfor %}>: View {
     var body: TupleView<({% for case in enum.cases %}T{{ forloop.counter }}?{{ ', ' if not forloop.last }}{% endfor %})>
@@ -10,30 +11,32 @@ import SwiftUI
     init(
       value: {{ enum.name }},
       {% for case in enum.cases %}
-      {{ case.name }}: @escaping ({% for av in case.associatedValues %}{{ av.typeName }}{{ ', ' if not forloop.last }}{% endfor %}) -> T{{ forloop.counter }}{{ ', ' if not forloop.last }}
+      {{ case.name }} p{{ forloop.counter }}: @escaping ({% for av in case.associatedValues %}{{ av.typeName }}{{ ', ' if not forloop.last }}{% endfor %}) -> T{{ forloop.counter }}{{ ', ' if not forloop.last }}
       {% endfor %}
     ) {
       {% for case in enum.cases %}
-      var {{ case.name }}View: T{{ forloop.counter }}?
+      var v{{ forloop.counter }}: T{{ forloop.counter }}?
       {% endfor %}
 
       switch value {
       {% for case in enum.cases %}
       {% if case.associatedValues.count > 0 %}
-      case .{{ case.name }}({% for av in case.associatedValues %}let p{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %}):
+      case .{{ case.name }}({% for av in case.associatedValues %}let f{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %}):
       {% else %}
       case .{{ case.name }}:
       {% endif %}
       {% if case.associatedValues.count > 0 %}
-        {{ case.name }}View = {{ case.name }}({% for av in case.associatedValues %}p{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %})
+        v{{ forloop.counter }} = p{{ forloop.counter }}({% for av in case.associatedValues %}f{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %})
       {% else %}
-        {{ case.name }}View = {{ case.name }}()
+        v{{ forloop.counter }} = p{{ forloop.counter }}()
       {% endif %}
       {% endfor %}
       }
 
-      body = TupleView(({% for case in enum.cases %}{{ case.name }}View{{ ', ' if not forloop.last }}{% endfor %}))
+      body = TupleView(({% for case in enum.cases %}v{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %}))
     }
   }
 }
+
+{% endif %}
 {% endfor %}

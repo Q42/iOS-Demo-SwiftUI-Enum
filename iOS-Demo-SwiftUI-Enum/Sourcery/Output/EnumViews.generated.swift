@@ -11,55 +11,49 @@ internal extension Row {
 
     init(
       value: Row,
-      text: @escaping (String) -> T1, 
-      image: @escaping (String, CGFloat, CGFloat) -> T2, 
-      separator: @escaping () -> T3
+      text p1: @escaping (TextRow) -> T1, 
+      image p2: @escaping (String, CGFloat, CGFloat) -> T2, 
+      separator p3: @escaping () -> T3
     ) {
-      var textView: T1?
-      var imageView: T2?
-      var separatorView: T3?
+      var v1: T1?
+      var v2: T2?
+      var v3: T3?
 
       switch value {
-      case .text(let p1):
-        textView = text(p1)
-      case .image(let p1, let p2, let p3):
-        imageView = image(p1, p2, p3)
+      case .text(let f1):
+        v1 = p1(f1)
+      case .image(let f1, let f2, let f3):
+        v2 = p2(f1, f2, f3)
       case .separator:
-        separatorView = separator()
+        v3 = p3()
       }
 
-      body = TupleView((textView, imageView, separatorView))
+      body = TupleView((v1, v2, v3))
     }
   }
 }
-internal extension Sjaak {
-  struct Switch<T1: View, T2: View, T3: View, T4: View>: View {
-    var body: TupleView<(T1?, T2?, T3?, T4?)>
+
+internal extension TextRow {
+  struct Switch<T1: View, T2: View>: View {
+    var body: TupleView<(T1?, T2?)>
 
     init(
-      value: Sjaak,
-      henk: @escaping () -> T1, 
-      karel: @escaping (Int) -> T2, 
-      kees: @escaping ([(x: Int, y: CGFloat)]) -> T3, 
-      jaap: @escaping () -> T4
+      value: TextRow,
+      heading p1: @escaping (String) -> T1, 
+      body p2: @escaping (String) -> T2
     ) {
-      var henkView: T1?
-      var karelView: T2?
-      var keesView: T3?
-      var jaapView: T4?
+      var v1: T1?
+      var v2: T2?
 
       switch value {
-      case .henk:
-        henkView = henk()
-      case .karel(let p1):
-        karelView = karel(p1)
-      case .kees(let p1):
-        keesView = kees(p1)
-      case .jaap:
-        jaapView = jaap()
+      case .heading(let f1):
+        v1 = p1(f1)
+      case .body(let f1):
+        v2 = p2(f1)
       }
 
-      body = TupleView((henkView, karelView, keesView, jaapView))
+      body = TupleView((v1, v2))
     }
   }
 }
+
