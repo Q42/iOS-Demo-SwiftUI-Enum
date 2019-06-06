@@ -4,11 +4,36 @@ import SwiftUI
 
 {% for enum in types.enums %}
 {{ enum.accessLevel }} extension {{ enum.name }} {
-  struct Switch<{% for index in 0...enum.cases.count %}T{{ index }}: View{{ ', ' if not forloop.last }}{% endfor %}>: View {
-    var body: TupleView<({% for index in 1...enum.cases.count %}T{{ index }}{{ ', ' if not forloop.last }}{% endfor %})>
+  struct Switch<{% for case in enum.cases %}T{{ forloop.counter }}: View{{ ', ' if not forloop.last }}{% endfor %}>: View {
+    var body: TupleView<({% for case in enum.cases %}T{{ forloop.counter }}?{{ ', ' if not forloop.last }}{% endfor %})>
 
-    // HELP !1!!
+    init(
+      value: {{ enum.name }},
+      {% for case in enum.cases %}
+      {{ case.name }}: @escaping ({% for av in case.associatedValues %}{{ av.typeName }}{{ ', ' if not forloop.last }}{% endfor %}) -> T{{ forloop.counter }}{{ ', ' if not forloop.last }}
+      {% endfor %}
+    ) {
+      {% for case in enum.cases %}
+      var {{ case.name }}View: T{{ forloop.counter }}?
+      {% endfor %}
+
+      switch value {
+      {% for case in enum.cases %}
+      {% if case.associatedValues.count > 0 %}
+      case .{{ case.name }}({% for av in case.associatedValues %}let p{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %}):
+      {% else %}
+      case .{{ case.name }}:
+      {% endif %}
+      {% if case.associatedValues.count > 0 %}
+        {{ case.name }}View = {{ case.name }}({% for av in case.associatedValues %}p{{ forloop.counter }}{{ ', ' if not forloop.last }}{% endfor %})
+      {% else %}
+        {{ case.name }}View = {{ case.name }}()
+      {% endif %}
+      {% endfor %}
+      }
+
+      body = TupleView(({% for case in enum.cases %}{{ case.name }}View{{ ', ' if not forloop.last }}{% endfor %}))
+    }
   }
 }
 {% endfor %}
-

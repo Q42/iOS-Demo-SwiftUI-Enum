@@ -8,6 +8,13 @@
 
 import SwiftUI
 
+enum Sjaak {
+  case henk
+  case karel(leeftijd: Int)
+  case kees(dingen: [(x: Int, y: CGFloat)])
+  case jaap
+}
+
 enum Row: Identifiable {
   case text(String)
   case image(name: String, width: CGFloat, height: CGFloat)
@@ -25,19 +32,31 @@ struct ContentView: View {
     .image(name: "image", width: 42, height: 42),
   ]
 
+  var sjaak = Sjaak.kees(dingen: [(x: 1, y: 52.0)])
+
   var body: some View {
-    return List(rows) { row in
-      RowSwitch(
-        row: row,
-        text: { label in
-          Text(label)
-        }, image: { (name, width, height) in
-          Image(name)
-            .resizable()
-            .frame(width: width, height: height, alignment: .center)
-        }, separator: {
-          Divider()
-        }
+    return Group {
+      List(rows) { row in
+        RowSwitch(
+          row: row,
+          text: { label in
+            Text(label)
+          }, image: { (name, width, height) in
+            Image(name)
+              .resizable()
+              .frame(width: width, height: height, alignment: .center)
+          }, separator: {
+            Divider()
+          }
+        )
+      }
+
+      Sjaak.Switch(
+        value: sjaak,
+        henk: { Text("Henk") },
+        karel: { Image("\($0)") },
+        kees: { Text("\($0.first!.x) \($0.first!.y)") },
+        jaap: { Text("Jaap") }
       )
     }
   }
