@@ -22,8 +22,7 @@ enum TextRow {
 }
 
 struct ContentView: View {
-
-  var rows: [Row] = [
+  let rows: [Row] = [
     .text(.heading("Solving Enums")),
     .text(.body("in SwiftUI")),
     .separator,
@@ -33,27 +32,37 @@ struct ContentView: View {
   var body: some View {
     return Group {
       List(rows) { row in
-        Row.Switch(
-          value: row,
-          text: { textRow in
-            TextRow.Switch(
-              value: textRow,
-              heading: { text in
-                Text(text).font(.headline)
-              }, body: { text in
-                Text(text).font(.body)
-              }
-            )
-          }, image: { (name, width, height) in
-            Image(name)
-              .resizable()
-              .frame(width: width, height: height, alignment: .center)
-          },
-          separator: {
-            Divider()
-          }
-        )
+        RowView(row: row)
       }
     }
+  }
+}
+
+struct RowView: View {
+  let row: Row
+
+  var body: some View {
+    Row.Switch(
+      value: row,
+      text: { TextRowView(textRow: $0) },
+      image: { (name, width, height) in
+        Image(name)
+          .resizable()
+          .frame(width: width, height: height, alignment: .center)
+      },
+      separator: { Divider() }
+    )
+  }
+}
+
+struct TextRowView: View {
+  let textRow: TextRow
+
+  var body: some View {
+    TextRow.Switch(
+      value: textRow,
+      heading: { Text($0).font(.headline) },
+      body: { Text($0).font(.body) }
+    )
   }
 }
